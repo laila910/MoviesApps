@@ -1,0 +1,32 @@
+<div id="homeMainContainer" class="mx-auto" style="width: 90%">
+    <a (click)="allMovies()" calss="btn btn-info m-2"><b>All</b></a>
+    <div  class="py-2 rounded d-flex flex-column" *ngFor="let cat of categories" class="d-inline">
+        <a  (click)="homePopulateData(cat.id)" class="btn btn-info m-2"><b>{{cat.name}}</b></a>
+    </div>   
+    <div id="homeProduct" style="margin-bottom: 8%; margin-top: 6%;">
+        <div style="text-align: center; color:#191970"
+            class="mb-5">
+            <h3>Movies</h3>
+        </div>
+        <div class="alert alert-success" *ngIf="msg!=''">
+            {{msg}}
+        </div>
+        <div class="alert alert-primary" *ngIf="categoryHead!=''">
+            You are in {{categoryHead}} Category
+        </div>
+        <div class="row pt-4" id="homeProductMain">
+            <div class="col-md-4 col-sm-12 mb-3" *ngFor="let m of AllMovies">
+                <div class="card" style="padding:0;">
+                 <img class="card-img-top" src='https://test-api.storexweb.com/{{m.image}}'>
+                 <div class="card-body">
+                    <h5 class="card-title">{{m.name}}</h5>
+                    <p class="card-text">{{m.description}}</p>
+                    <button routerLink="singleMovie/{{m.id}}" class="btn btn-primary m-2" >movie details</button>
+                    <button routerLink="editMovie/{{m.id}}" class="btn btn-primary m-2" >Edit</button>
+                    <button (click)="deleted(m.id)" class="btn btn-primary mt-1" >Delete</button>
+                </div>
+                 </div>
+            </div>
+        </div>
+    </div> 
+</div>

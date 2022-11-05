@@ -1,0 +1,45 @@
+<div class="container">
+    <div  id="form" class="row d-flex justify-content-center m-5">
+        <div class="col-lg-6">
+            <div><h2>Edit Movie</h2></div>
+            <form #EditMovieForm="ngForm"  (ngSubmit)="onAdd(EditMovieForm)" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-8 mt-5">
+                        <label>Movie Name</label>
+                        <input class="form-control" type="text" name="name" [value]="prev.name" required [(ngModel)]="prev.name" #name="ngModel" placeholder="Name" >
+                        <div class="alert alert-danger" *ngIf="name?.invalid && (name?.touched)">
+                            <p *ngIf="name?.errors?.['required']">required</p>
+                        </div>
+                    </div>
+                    <div class="col-md-8 mt-5 mb-5">
+                        <label>Movie Description</label>
+                        <input class="form-control" type="text" [value]="prev.description" required [(ngModel)]="prev.description" name="description" #description="ngModel" placeholder="Description">
+                        <div class="alert alert-danger" *ngIf="description?.invalid && (description?.touched)">
+                            <p *ngIf="description?.errors?.['required']">required</p>
+                        </div>
+                    </div>
+                    <div class="col-md-8 mt-5 mb-5">
+                        <label>Movie Image</label>
+                        <input  type="file" class="form-control" [value]="prev.image" required name="image" [(ngModel)]="prev.image"
+                        (change)="onChange($event)" #image="ngModel" >
+                        <!-- <button class="btn btn-primary" >Select Image</button> -->
+                        <div class="alert alert-danger" *ngIf="image?.invalid && (image?.touched)">
+                          <p *ngIf="image?.errors?.['required']">required</p>
+                        </div>
+                        <img src="https://test-api.storexweb.com/{{prev.image}}" alt="previous image">
+                    </div>
+                    <div class="col-md-8 mt-5 mb-5">
+                        <label> Select Category</label>
+                        <select name="category_id" class="form-select" required [(ngModel)]="prev.category_id"  [value]="prev.category_id" aria-label="Default select example" >
+                            <option *ngFor="let c of AllCat" value="{{c.id}}">{{c.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12 mb-5">
+                        <button class="btn btn-danger">Edit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

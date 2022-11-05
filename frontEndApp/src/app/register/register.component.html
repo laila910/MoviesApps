@@ -1,0 +1,46 @@
+<div class="container">
+    <div class="row d-flex justify-content-center m-5">
+        <div class="col-lg-6">
+            <div class="alert alert-danger" *ngIf="registerForm.submitted && registerForm.invalid">
+                Invalid Data, please try again
+            </div>
+            <div class="alert alert-success" *ngIf="registerForm.submitted && registerForm.valid && msg!=''">
+                 {{msg}}
+            </div>
+            <div><h2>Register</h2></div>
+            <form #registerForm="ngForm" (ngSubmit)="onRegister(registerForm)">
+                <div class="row">
+                    <div class="col-md-8 mt-4 mb-5">
+                        <label>Name</label>
+                        <input class="form-control" type="text" placeholder="Name" required minlength="3" name="name" [(ngModel)]="userData.name" #name="ngModel">
+                        <div class="alert alert-danger" *ngIf="name.invalid && (name.touched||registerForm.submitted||name.dirty)">
+                            <p *ngIf="name.errors?.['required']">required</p>
+                            <p *ngIf="name.errors?.['minlength']">min length should be 3</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8 mb-5">
+                        <label>E-mail</label>
+
+                        <input class="form-control" type="text" placeholder="E-mail" required name="email" [(ngModel)]="userData.email" #email="ngModel" [email]="true">
+                        <div class="alert alert-danger" *ngIf="email.invalid && (email.touched||registerForm.submitted)">
+                            <p *ngIf="email.errors?.['required']">required</p>
+                            <p *ngIf="email.errors?.['email']">email not valid</p>
+                        </div>
+                    </div>
+                    <div class="col-md-8 mb-5">
+                        <label>Password</label>
+                        <input class="form-control" type="text" placeholder="Password" minlength="5" required name="password" [(ngModel)]="userData.password" #password="ngModel">
+                        <div class="alert alert-danger" *ngIf="password.invalid && (password.touched||registerForm.submitted)">
+                            <p *ngIf="password.errors?.['required']">required</p>
+                            <p *ngIf="password.errors?.['minlength']">min length should be 5</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mb-5">
+                        <button class="btn btn-danger">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="container">
+    <div  id="form" class="row d-flex justify-content-center m-5">
+        <div class="col-lg-6">
+            <div><h2>Add New Movie</h2></div>
+            <form [formGroup]="AddMovieForm" (ngSubmit)="onAdd(AddMovieForm)" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-8 mt-5">
+                        <label>Movie Name</label>
+                        <input class="form-control" type="text" name="name" placeholder="Name" required formControlName="name">
+                        <div class="alert alert-danger" *ngIf="name?.invalid && (name?.touched)">
+                            <p *ngIf="name?.errors?.['required']">required</p>
+                        </div>
+                    </div>
+                    <div class="col-md-8 mt-5 mb-5">
+                        <label>Movie Description</label>
+                        <input class="form-control" type="text" name="description" placeholder="Description" required formControlName="description">
+                        <div class="alert alert-danger" *ngIf="description?.invalid && (description?.touched)">
+                            <p *ngIf="description?.errors?.['required']">required</p>
+                        </div>
+                    </div>
+                    <div class="col-md-8 mt-5 mb-5">
+                        <label>Movie Image</label>
+                        <input type="file" class="form-control" name="image" required 
+                        (change)="onChange($event)">
+                        <div class="alert alert-danger" *ngIf="image?.invalid && (image?.touched)">
+                          <p *ngIf="image?.errors?.['required']">required</p>
+                        </div>
+                    </div>
+                    <div class="col-md-8 mt-5 mb-5">
+                        <label> Select Category</label>
+                        <select name="category_id" class="form-select" required formControlName="category_id" aria-label="Default select example" >
+                            <option *ngFor="let c of AllCat" value="{{c.id}}">{{c.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12 mb-5">
+                        <button class="btn btn-danger">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

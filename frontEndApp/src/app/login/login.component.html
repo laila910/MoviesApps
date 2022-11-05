@@ -1,0 +1,34 @@
+<div class="container">
+    <div  id="form" class="row d-flex justify-content-center m-5">
+        <div class="col-lg-6">
+            <div class="alert alert-success" *ngIf="msg!=''">
+                {{this.msg}}
+            </div>
+            <div><h2>Login </h2></div>
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm)">
+                <div class="row">
+                    <div class="col-md-8 mt-5">
+                        <label>E-mail </label>
+                        <input class="form-control" type="text" name="email" placeholder="E-mail" formControlName="email" [email]="true">
+                        <div class="alert alert-danger" *ngIf="email?.invalid && (email?.touched)">
+                            <p *ngIf="email?.errors?.['required']">required</p>
+                            <p *ngIf="email?.errors?.['email']">email</p>
+                        </div>
+                    </div>
+                    <div class="col-md-8 mt-5 mb-5">
+                        <label>Password</label>
+                        <input class="form-control" type="password" name="password" placeholder="Password" minlength="5" required formControlName="password">
+                        <div class="alert alert-danger" *ngIf="password?.invalid && (password?.touched)">
+                            <p *ngIf="password?.errors?.['required']">required</p>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 mb-5">
+                        <button class="btn btn-danger">Login</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
